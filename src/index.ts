@@ -1,6 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { Offer } from './models/Offer';
+import multer from 'multer';
+import { v4 as uuidv4 } from 'uuid';
+import path from 'path';
+import { Image } from './models/Image';
 
 const app = express();
 const PORT = 3000;
@@ -21,14 +25,48 @@ mongoose.connect(dbUri)
     console.error('Database connection error:', error);
   });
 
+
+  const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, './public/images'); // Save images in the "public/images" directory
+    },
+    filename: (req, file, cb) => {
+      const originalName = path.parse(file.originalname).name.replace(/\s+/g, '_'); // Remove spaces
+      const extension = path.extname(file.originalname); // Get file extension
+      const uniqueId = uuidv4(); // Generate unique ID
+      cb(null, `${originalName}_${uniqueId}${extension}`);
+    },
+  });
+  const upload = multer({ storage });
+  
 // POST Route
 app.post('/upload', async (req, res) => {
-    
+    try {
         const { title, description, price } = req.body;
-        console.log("data reviced", req.body);
-        const offer = new Offer({ title, description, price });
-        await offer.save();
-        res.status(201).send('Offer created successfully!');
+
+        let imageId;
+
+        if (req.file) {
+            const image = new Image({
+              filename: req.file.filename,
+              path: `/images/${req.file.filename}`,
+            });
+            const savedImage = await image.save();
+            imageId = savedImage._id; // Get the image ID
+          }
+      
+          // Save the offer
+          const offer = new Offer({ title, description, price, imageId });
+          await offer.save();
+      
+          res.status(201).send('Offer and image saved successfully!');
+        } catch (error) {
+          console.error('Error saving offer or image:', error);
+          res.status(500).send('Failed to save offer and image');
+        }
+        
+        
+        
 });
 
 
