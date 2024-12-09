@@ -14,15 +14,18 @@
   "description": "",
   "dependencies": {
     "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "install": "^0.13.0",
     "mongoose": "^8.8.4",
+    "fs": "^0.0.1-security",
     "multer": "^1.4.5-lts.1",
     "npm": "^10.9.2",
     "path": "^0.12.7",
     "uuid": "^11.0.3"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
     "@types/express": "^5.0.0",
     "@types/mongoose": "^5.11.96",
     "@types/multer": "^1.4.12",
