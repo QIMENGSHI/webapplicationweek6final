@@ -19,12 +19,69 @@ form.addEventListener('submit', async (e) => {
         });
     
         if (response.ok) {
-          alert('Data saved successfully!');
+          alert('offer submitted and data saved successfully!');
+          form.reset();
+          loadOffers();// reload offers
         } else {
           alert('Failed to save data.');
         }
       } catch (error) {
         console.error('Error submitting form:', error);
+        alert('An error occurred while submitting the offer.');
       }
   });
+  
+
+  // Fetch and display all offers
+async function loadOffers() {
+    try {
+      const response = await fetch('/offers');
+      if (!response.ok) {
+        throw new Error('Failed to fetch offers');
+      }
+  
+      const offers = await response.json();
+      const container = document.getElementById('offersContainer');
+  
+      // Clear existing offers
+      container.innerHTML = '';
+  
+      // Render each offer
+      offers.forEach((offer) => {
+        const offerDiv = document.createElement('div');
+        offerDiv.className = 'offerDiv';
+  
+        // Title
+        const titleElement = document.createElement('p');
+        titleElement.textContent = `Title: ${offer.title}`;
+        offerDiv.appendChild(titleElement);
+  
+        // Description
+        const descriptionElement = document.createElement('p');
+        descriptionElement.textContent = `Description: ${offer.description}`;
+        offerDiv.appendChild(descriptionElement);
+  
+        // Price
+        const priceElement = document.createElement('p');
+        priceElement.textContent = `Price: $${offer.price}`;
+        offerDiv.appendChild(priceElement);
+  
+        // Image
+        if (offer.imagePath) {
+          const imageElement = document.createElement('img');
+          imageElement.src = offer.imagePath;
+          imageElement.alt = offer.title;
+          imageElement.style.maxWidth = '200px';
+          offerDiv.appendChild(imageElement);
+        }
+  
+        container.appendChild(offerDiv);
+      });
+    } catch (error) {
+      console.error('Error loading offers:', error);
+    }
+  }
+  
+  // Load offers when the page is loaded
+  document.addEventListener('DOMContentLoaded', loadOffers);
   

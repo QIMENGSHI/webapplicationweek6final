@@ -72,6 +72,32 @@ app.post('/upload', upload.single('image'), async (req, res) => {
         
 });
 
+// get route 
+
+app.get('/offers', async (req, res) => {
+    try {
+      // Fetch all offers and populate the image information
+      const offers = await Offer.find().populate('imageId');
+  
+      // Transform the offers into the desired format
+      const response = offers.map((offer) => {
+        const image = offer.imageId as any;
+        return {
+          title: offer.title,
+          description: offer.description,
+          price: offer.price,
+          imagePath: image ? image.path : null,
+        };
+      });
+  
+      res.status(200).json(response);
+    } catch (error) {
+      console.error('Error fetching offers:', error);
+      res.status(500).send('Failed to fetch offers');
+    }
+  });
+  
+
 
 
 // Start Server
