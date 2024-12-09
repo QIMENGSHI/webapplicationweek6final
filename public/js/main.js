@@ -4,6 +4,8 @@ const form = document.getElementById("offerForm");
 form.addEventListener('submit', async (e) => {
     e.preventDefault(); // Prevent default submission
 
+    // const formData = new FormData(form);
+
     const formData = {
         title: document.getElementById('title').value,
         price: document.getElementById('price').value,
@@ -13,10 +15,7 @@ form.addEventListener('submit', async (e) => {
       try {
         const response = await fetch('/upload', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
+          body: formData,
         });
     
         if (response.ok) {

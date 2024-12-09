@@ -40,8 +40,11 @@ mongoose.connect(dbUri)
   const upload = multer({ storage });
   
 // POST Route
-app.post('/upload', async (req, res) => {
+app.post('/upload', upload.single('image'), async (req, res) => {
     try {
+
+        console.log('Request Body:', req.body); // Log the form data
+        console.log('Uploaded File:', req.file); // Log the uploaded file data
         const { title, description, price } = req.body;
 
         let imageId;
