@@ -1,31 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Offer submission</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-    <form id="offerForm" method="POST" action="/upload" enctype="multipart/form-data">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required />
-    
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" required />
-    
-        <label for="description">Description:</label>
-        <textarea id="description" name="description"  placeholder="enter your discription here" required></textarea>
-    
-        <label for="image">Image:</label>
-        <input type="file" id="image" name="image" />
-    
-        <button type="submit">Submit</button>
-    </form>
-    <h2>Offers</h2>
-    <div id="offersContainer"></div>
-    
+      <h1 class="center-align">Offers</h1>
+      <form
+        id="offerForm"
+        class="card-panel"
+        method="POST"
+        action="/upload"
+        enctype="multipart/form-data"
+      >
+        <div class="input-field">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" required />
+        </div>
+
+        <div class="input-field">
+          <label for="price">Price:</label>
+          <input type="number" id="price" name="price" required />
+        </div>
+
+        <div class="input-field">
+          <label for="description">Description:</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="enter your discription here"
+            required
+          ></textarea>
+        </div>
+
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Upload Image:</span>
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" />
+          </div>
+
+          <div class="file-path-wrapper">
+            <input
+              class="file-path validate"
+              type="text"
+              placeholder="Upload an image"
+            />
+          </div>
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit">
+          Submit
+        </button>
+      </form>
+      <h2>Offers</h2>
+      <div id="offersContainer"></div>
     </div>
-</body>
-<script src="./js/main.js"></script>
+  </body>
+  <script src="./js/main.js"></script>
 </html>
