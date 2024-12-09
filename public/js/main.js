@@ -47,76 +47,76 @@ async function loadOffers() {
       container.innerHTML = '';
   
       // Render each offer
-      // offers.forEach((offer) => {
-      //   const offerDiv = document.createElement('div');
-      //   offerDiv.className = 'offerDiv';
-  
-      //   // Title
-      //   const titleElement = document.createElement('p');
-      //   titleElement.textContent = `Title: ${offer.title}`;
-      //   offerDiv.appendChild(titleElement);
-  
-      //   // Description
-      //   const descriptionElement = document.createElement('p');
-      //   descriptionElement.textContent = `Description: ${offer.description}`;
-      //   offerDiv.appendChild(descriptionElement);
-  
-      //   // Price
-      //   const priceElement = document.createElement('p');
-      //   priceElement.textContent = `Price: $${offer.price}`;
-      //   offerDiv.appendChild(priceElement);
-  
-      //   // Image
-      //   if (offer.imagePath) {
-      //     const imageElement = document.createElement('img');
-      //     imageElement.src = offer.imagePath;
-      //     imageElement.alt = offer.title;
-      //     imageElement.style.maxWidth = '200px';
-      //     offerDiv.appendChild(imageElement);
-      //   }
-  
-      //   container.appendChild(offerDiv);
-      // });
       offers.forEach((offer) => {
-        const offerDiv = document.createElement("div");
-        offerDiv.className = "col s12 m6 l4"; 
+        const offerDiv = document.createElement('div');
+        offerDiv.className = 'offerDiv';
   
-        const card = document.createElement("div");
-        card.className = "card hoverable"; 
+        // Title
+        const titleElement = document.createElement('p');
+        titleElement.textContent = `Title: ${offer.title}`;
+        offerDiv.appendChild(titleElement);
   
-        
+        // Description
+        const descriptionElement = document.createElement('p');
+        descriptionElement.textContent = `Description: ${offer.description}`;
+        offerDiv.appendChild(descriptionElement);
+  
+        // Price
+        const priceElement = document.createElement('p');
+        priceElement.textContent = `Price: $${offer.price}`;
+        offerDiv.appendChild(priceElement);
+  
+        // Image
         if (offer.imagePath) {
-          const cardImage = document.createElement("div");
-          cardImage.className = "card-image";
-          const img = document.createElement("img");
-          img.className = "responsive-img";
-          img.src = offer.imagePath;
-          img.alt = offer.title;
-          cardImage.appendChild(img);
-          card.appendChild(cardImage);
+          const imageElement = document.createElement('img');
+          imageElement.src = offer.imagePath;
+          imageElement.alt = offer.title;
+          imageElement.style.maxWidth = '200px';
+          offerDiv.appendChild(imageElement);
         }
   
-        
-        const cardContent = document.createElement("div");
-        cardContent.className = "card-content";
-  
-        const titleSpan = document.createElement("span");
-        titleSpan.className = "card-title";
-        titleSpan.textContent = offer.title;
-        cardContent.appendChild(titleSpan);
-  
-        const descriptionP = document.createElement("p");
-        descriptionP.textContent = offer.description;
-        cardContent.appendChild(descriptionP);
-  
-        const priceP = document.createElement("p");
-        priceP.textContent = `Price: €${offer.price}`;
-        cardContent.appendChild(priceP);
-  
-        card.appendChild(cardContent);
-        offerDiv.appendChild(card);
         container.appendChild(offerDiv);
       });
+      // offers.forEach((offer) => {
+      //   const offerDiv = document.createElement("div");
+      //   offerDiv.className = "col s12 m6 l4"; 
+  
+      //   const card = document.createElement("div");
+      //   card.className = "card hoverable"; 
+  
+        
+      //   if (offer.imagePath) {
+      //     const cardImage = document.createElement("div");
+      //     cardImage.className = "card-image";
+      //     const img = document.createElement("img");
+      //     img.className = "responsive-img";
+      //     img.src = offer.imagePath;
+      //     img.alt = offer.title;
+      //     cardImage.appendChild(img);
+      //     card.appendChild(cardImage);
+      //   }
+  
+        
+      //   const cardContent = document.createElement("div");
+      //   cardContent.className = "card-content";
+  
+      //   const titleSpan = document.createElement("span");
+      //   titleSpan.className = "card-title";
+      //   titleSpan.textContent = offer.title;
+      //   cardContent.appendChild(titleSpan);
+  
+      //   const descriptionP = document.createElement("p");
+      //   descriptionP.textContent = offer.description;
+      //   cardContent.appendChild(descriptionP);
+  
+      //   const priceP = document.createElement("p");
+      //   priceP.textContent = `Price: €${offer.price}`;
+      //   cardContent.appendChild(priceP);
+  
+      //   card.appendChild(cardContent);
+      //   offerDiv.appendChild(card);
+      //   container.appendChild(offerDiv);
+      // });
     } catch (error) {
       console.error('Error loading offers:', error);
     }
